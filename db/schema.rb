@@ -32,10 +32,6 @@ ActiveRecord::Schema[7.0].define(version: 0) do
     t.serial "teacher_id", null: false
   end
 
-  create_table "groups", id: :serial, force: :cascade do |t|
-    t.string "code", limit: 100, null: false
-  end
-
   create_table "questions", id: :serial, force: :cascade do |t|
     t.string "name", limit: 100, null: false
     t.serial "discipline_id", null: false
@@ -46,7 +42,7 @@ ActiveRecord::Schema[7.0].define(version: 0) do
     t.string "first_name", limit: 30, null: false
     t.string "second_name", limit: 30, null: false
     t.integer "course", null: false
-    t.serial "group_id", null: false
+    t.string "group_code", limit: 10, null: false
   end
 
   create_table "teachers", id: :serial, force: :cascade do |t|
@@ -72,7 +68,6 @@ ActiveRecord::Schema[7.0].define(version: 0) do
   add_foreign_key "attempts", "variants", name: "attempts_variant_id_fkey", on_update: :cascade
   add_foreign_key "disciplines", "teachers", name: "disciplines_teacher_id_fkey", on_update: :cascade
   add_foreign_key "questions", "disciplines", name: "questions_discipline_id_fkey", on_update: :cascade
-  add_foreign_key "students", "groups", name: "students_group_id_fkey", on_update: :cascade
   add_foreign_key "themes", "disciplines", name: "themes_discipline_id_fkey", on_update: :cascade
   add_foreign_key "themes", "questions", name: "themes_question_id_fkey", on_update: :cascade
   add_foreign_key "variants", "disciplines", name: "variants_discipline_id_fkey", on_update: :cascade
