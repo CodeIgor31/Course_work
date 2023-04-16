@@ -48,6 +48,7 @@ ActiveRecord::Schema[7.0].define(version: 0) do
   create_table "teachers", id: :serial, force: :cascade do |t|
     t.string "first_name", limit: 30, null: false
     t.string "second_name", limit: 30, null: false
+    t.string "patronymic", limit: 30, null: false
   end
 
   create_table "themes", id: :serial, force: :cascade do |t|
