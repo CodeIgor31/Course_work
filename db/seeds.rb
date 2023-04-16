@@ -2,7 +2,7 @@ require 'faker'
 
 # Inserting into Teachers
 
-# 18500.times do
+# 20010.times do
 #   full_name = Faker::Name.name_with_middle.tr("'", "")
 #   first_name, second_name, patronymic = full_name.split 
 #   sql = "INSERT INTO teachers (first_name , second_name, patronymic) VALUES ('#{first_name}', '#{second_name}', '#{patronymic}')  "
