@@ -10,10 +10,14 @@ require 'faker'
 # end
 
 #Inserting into disciplines
-
+# i = 1
 # 22000.times do 
 #   name = Faker::Educator.subject
-#   teacher_id = rand(1..20010)
+#   if i > 20010
+#     i = 1
+#   end
+#   teacher_id = i
+#   i += 1
 #   sql = "INSERT INTO disciplines (name , teacher_id) VALUES ('#{name}', '#{teacher_id}')  "
 #   ActiveRecord::Base.connection.exec_query(sql)
 # end
