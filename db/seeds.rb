@@ -78,3 +78,24 @@ require 'faker'
 #   sql = "INSERT INTO answers (description , mark , question_id) VALUES ('#{description}', '#{mark}', '#{question_id}')  "
 #   ActiveRecord::Base.connection.exec_query(sql)
 # end
+
+#Inserting into themes
+k = 1
+counter = 0
+theme_num = 100
+100.times do
+  presql = "select * from questions where discipline_id = '#{k}'" 
+  res = ActiveRecord::Base.connection.exec_query(presql)
+  res.each do |hash|
+    if counter == 20 then
+      counter = 0
+      theme_num += 1
+    end
+    question_id = hash["id"]
+    sql = "INSERT INTO themes (theme_num , discipline_id , question_id) VALUES ('#{theme_num}', '#{k}', '#{question_id}')  "
+    ActiveRecord::Base.connection.exec_query(sql)
+    counter += 1
+  end
+  k += 1
+  theme_num = theme_num + 100 - 9
+end
