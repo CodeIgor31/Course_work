@@ -67,3 +67,14 @@ require 'faker'
 #   end
 #   k += 1
 # end
+
+#Inserting into answers
+# i = 1
+# 20000.times do
+#   description = Faker::Lorem.unique.sentence
+#   mark = rand(5..10)
+#   question_id = i
+#   i += 1
+#   sql = "INSERT INTO answers (description , mark , question_id) VALUES ('#{description}', '#{mark}', '#{question_id}')  "
+#   ActiveRecord::Base.connection.exec_query(sql)
+# end
