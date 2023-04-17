@@ -29,11 +29,11 @@ ActiveRecord::Schema[7.0].define(version: 0) do
 
   create_table "disciplines", id: :serial, force: :cascade do |t|
     t.string "name", limit: 100, null: false
-    t.serial "teacher_id", null: false
+    t.index ["name"], name: "unique_name", unique: true
   end
 
   create_table "questions", id: :serial, force: :cascade do |t|
-    t.string "name", limit: 100, null: false
+    t.string "question", limit: 100, null: false
     t.serial "discipline_id", null: false
     t.string "part", limit: 1, null: false
   end
@@ -41,15 +41,16 @@ ActiveRecord::Schema[7.0].define(version: 0) do
   create_table "students", id: :serial, force: :cascade do |t|
     t.string "first_name", limit: 30, null: false
     t.string "second_name", limit: 30, null: false
+    t.string "patronymic", limit: 30, null: false
     t.integer "course", null: false
     t.string "group_code", limit: 10, null: false
-    t.string "patronymic", limit: 30, null: false
   end
 
   create_table "teachers", id: :serial, force: :cascade do |t|
     t.string "first_name", limit: 30, null: false
     t.string "second_name", limit: 30, null: false
     t.string "patronymic", limit: 30, null: false
+    t.serial "discipline_id", null: false
   end
 
   create_table "themes", id: :serial, force: :cascade do |t|
@@ -68,8 +69,8 @@ ActiveRecord::Schema[7.0].define(version: 0) do
   add_foreign_key "attempts", "disciplines", name: "attempts_discipline_id_fkey", on_update: :cascade
   add_foreign_key "attempts", "students", name: "attempts_student_id_fkey", on_update: :cascade
   add_foreign_key "attempts", "variants", name: "attempts_variant_id_fkey", on_update: :cascade
-  add_foreign_key "disciplines", "teachers", name: "disciplines_teacher_id_fkey", on_update: :cascade
   add_foreign_key "questions", "disciplines", name: "questions_discipline_id_fkey", on_update: :cascade
+  add_foreign_key "teachers", "disciplines", name: "teachers_discipline_id_fkey", on_update: :cascade
   add_foreign_key "themes", "disciplines", name: "themes_discipline_id_fkey", on_update: :cascade
   add_foreign_key "themes", "questions", name: "themes_question_id_fkey", on_update: :cascade
   add_foreign_key "variants", "disciplines", name: "variants_discipline_id_fkey", on_update: :cascade
