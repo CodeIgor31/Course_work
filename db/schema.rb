@@ -36,6 +36,7 @@ ActiveRecord::Schema[7.0].define(version: 0) do
     t.string "question", limit: 100, null: false
     t.serial "discipline_id", null: false
     t.string "part", limit: 1, null: false
+    t.index ["question"], name: "unique_question", unique: true
   end
 
   create_table "students", id: :serial, force: :cascade do |t|
