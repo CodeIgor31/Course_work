@@ -47,3 +47,23 @@ require 'faker'
 #   sql = "INSERT INTO questions (question , discipline_id , part) VALUES ('#{question}', '#{discipline_id}', '#{part}')  "
 #   ActiveRecord::Base.connection.exec_query(sql)
 # end
+
+#Inserting into variants
+# k = 1
+# counter = 0
+# var_num = 1
+# 100.times do
+#   presql = "select * from questions where discipline_id = '#{k}'" 
+#   res = ActiveRecord::Base.connection.exec_query(presql)
+#   res.each do |hash|
+#     if counter == 10 then
+#       counter = 0
+#       var_num += 1
+#     end
+#     question_id = hash["id"]
+#     sql = "INSERT INTO variants (var_num , question_id , discipline_id) VALUES ('#{var_num}', '#{question_id}', '#{k}')  "
+#     ActiveRecord::Base.connection.exec_query(sql)
+#     counter += 1
+#   end
+#   k += 1
+# end
