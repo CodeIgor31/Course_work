@@ -108,11 +108,8 @@ require 'faker'
 # end
 
 #Inserting into attempts
-i = 141558
-10000000.times do 
-  if i > 1300000
-    i = 1
-  end
+i = 1
+900000.times do 
   student_id = i
   i += 1
   discipline_id = rand(1..100)
