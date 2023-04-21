@@ -221,6 +221,7 @@ DEPENDENCIES
   capybara
   debug
   faker!
+  i18n
   importmap-rails
   jbuilder
   pg (~> 1.1)
