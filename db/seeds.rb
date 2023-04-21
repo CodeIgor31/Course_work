@@ -466,22 +466,29 @@ I18n.reload!
 
 #Inserting into variants
 # k = 1
-# counter = 0
-# var_num = 1
-# 100.times do
-#   presql = "select * from questions where discipline_id = '#{k}'" 
-#   res = ActiveRecord::Base.connection.exec_query(presql)
-#   res.each do |hash|
-#     if counter == 10 then
-#       counter = 0
-#       var_num += 1
-#     end
-#     question_id = hash["id"]
-#     sql = "INSERT INTO variants (var_num , question_id , discipline_id) VALUES ('#{var_num}', '#{question_id}', '#{k}')  "
-#     ActiveRecord::Base.connection.exec_query(sql)
-#     counter += 1
+# 347.times do
+#   testsql = "select * from questions where discipline_id = '#{k}' and part = 'A'"
+#   fullsql = "select * from questions where discipline_id = '#{k}' and part = 'B'" 
+#   res = ActiveRecord::Base.connection.exec_query(testsql)
+#   full = ActiveRecord::Base.connection.exec_query(fullsql)
+#   testres = []
+#   fullres = []
+#   @var_name = ""
+#   res.each {|el| testres.push(el["id"])}
+#   full.each {|el| fullres.push(el["id"])}
+#   name = "select * from disciplines where id = '#{k}'"
+#   name_res = ActiveRecord::Base.connection.exec_query(name)
+#   name_res.each do |el|
+#     @var_name = el["name"] + '_'
 #   end
-#   var_num = 1 
+#   i = 1
+#   30.times do
+#     @var_name = @var_name + "#{i}"
+#     sql = "INSERT INTO variants (question_1 , question_2, var_name) VALUES ('#{testres.sample}','#{fullres.sample}', '#{@var_name}')  "
+#     ActiveRecord::Base.connection.exec_query(sql)
+#     @var_name = @var_name[0..-"#{i}".size-1]
+#     i += 1
+#   end
 #   k += 1
 # end
 

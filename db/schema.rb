@@ -47,6 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 0) do
   create_table "students", id: :serial, force: :cascade do |t|
     t.serial "person_id", null: false
     t.date "date_of_entering", null: false
+    t.string "quota", limit: 1, null: false
   end
 
   create_table "teachers", id: :serial, force: :cascade do |t|
@@ -60,9 +61,9 @@ ActiveRecord::Schema[7.0].define(version: 0) do
   end
 
   create_table "variants", id: :serial, force: :cascade do |t|
-    t.integer "var_num", null: false
     t.serial "question_1", null: false
     t.serial "question_2", null: false
+    t.string "var_name", limit: 100, null: false
   end
 
   add_foreign_key "attempts", "students", name: "attempts_student_id_fkey", on_update: :cascade
