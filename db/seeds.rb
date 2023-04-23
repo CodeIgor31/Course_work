@@ -1,6 +1,6 @@
 require 'faker'
+require 'date'
 Faker::Config.locale = :ru
-I18n.reload!
 # full_name = Faker::Name.female_middle_name
 # puts full_name
 
@@ -360,7 +360,7 @@ I18n.reload!
 
 # Inserting into persons
 # flag = 1
-# 200000.times do
+# 20000.times do
 #     role_id = "S"
 #     case flag
 #     when 1
@@ -374,11 +374,10 @@ I18n.reload!
 #       patronymic = Faker::Name.female_middle_name
 #       flag = 1
 #     end
-# #   course = rand(1..5)
-# #   group_code = "#{letters.sample}#{letters.sample}#{numbers.sample}-#{numbers.sample}#{numbers.sample}" 
 #   sql = "INSERT INTO persons (first_name , second_name , patronymic , role_id ) VALUES ('#{first_name}', '#{last_name}', '#{patronymic}', '#{role_id}')  "
 #   ActiveRecord::Base.connection.exec_query(sql)
 # end
+# p 'Person ready'
 
 #Inserting into Teachers
 # presql = "select * from persons where role_id = 'T'"
@@ -389,18 +388,18 @@ I18n.reload!
 # end
 
 #Inserting into Students
-# presql = "select * from persons where role_id = 'S'"
+# presql = "select * from persons where role_id = 'S' and id > 301000 "
 # res = ActiveRecord::Base.connection.exec_query(presql)
 # i = 1
-# year = 2013
+# year = 2008
 # quota = ["B", "P"]
 # date = ["#{year}-08-17", "#{year}-08-20"]
 # res.each do |pers|
-#   if i > 20000
-#     i = 1
-#     year += 1
-#     date = ["#{year}-08-17", "#{year}-08-20"]
-#   end
+#   # if i > 20000
+#   #   i = 1
+#   #   year -= 1
+#   #   date = ["#{year}-08-17", "#{year}-08-20"]
+#   # end
 #   q = quota.sample
 #   if q == "P"
 #     d = "#{year}-08-27"
@@ -412,6 +411,7 @@ I18n.reload!
 #   i += 1
 # end
 
+# p 'Students rdy'
 # Inserting into Teachers/Disciplines
 # tsql = "select * from teachers"
 # teachers = ActiveRecord::Base.connection.exec_query(tsql)
@@ -482,10 +482,20 @@ I18n.reload!
 #     @var_name = el["name"] + '_'
 #   end
 #   i = 1
+#   m = 0
+#   n = 0
 #   30.times do
 #     @var_name = @var_name + "#{i}"
-#     sql = "INSERT INTO variants (question_1 , question_2, var_name) VALUES ('#{testres.sample}','#{fullres.sample}', '#{@var_name}')  "
+#     sql = "INSERT INTO variants (question_1 , question_2, var_name) VALUES ('#{testres[m]}','#{fullres[n]}', '#{@var_name}')  "
 #     ActiveRecord::Base.connection.exec_query(sql)
+#     m += 1
+#     n += 1
+#     if m > testres.size-1
+#       m = 0
+#     end
+#     if n > fullres.size-1
+#       n = 0
+#     end
 #     @var_name = @var_name[0..-"#{i}".size-1]
 #     i += 1
 #   end
@@ -493,27 +503,141 @@ I18n.reload!
 # end
 
 
-#Inserting into attempts
-# i = 1
-# 900000.times do 
-#   student_id = i
-#   i += 1
-#   discipline_id = rand(1..100)
-#   presql = "SELECT * FROM variants where discipline_id = '#{discipline_id}' ORDER BY RANDOM() LIMIT 1 "
+# Inserting into attempts
+#   @year = 2008
+#   k = 1
+#   while k <= 4 do
+#   presql = "SELECT * FROM students where (date_of_entering = '#{@year}-08-17' or date_of_entering = '#{@year}-08-20' or date_of_entering = '#{@year}-08-27') and status = true"
 #   res = ActiveRecord::Base.connection.exec_query(presql)
-#   res.each do |hash|
-#     @variant_id = hash["id"]
+
+#   res.each do |student| 
+#     4.times do 
+#       date_win = Faker::Date.between(from: "#{@year+k}-01-15", to: "#{@year+k}-01-25")
+
+#       dissql = "select * from disciplines order by random() limit 1"
+#       res_dis = ActiveRecord::Base.connection.exec_query(dissql)
+#       res_dis.each {|el| @dis = el["id"]}
+
+#       tdsql = "select * from teachers_disciplines where discipline_id = '#{@dis}' order by random() limit 1"
+#       res_td = ActiveRecord::Base.connection.exec_query(tdsql)
+#       res_td.each {|el| @td = el["id"]}
+
+#       qesql = "select * from questions where discipline_id = '#{@dis}' order by random() limit 1"
+#       resqe = ActiveRecord::Base.connection.exec_query(qesql)
+#       resqe.each {|el| @qest_id = el["id"]}
+
+#       varsql = "select * from variants where question_1 = '#{@qest_id}' or question_2 = '#{@qest_id}' order by random() limit 1"
+#       resvar = ActiveRecord::Base.connection.exec_query(varsql)
+#       resvar.each {|el| @var = el["id"]}
+
+#       mark = rand(2..5)
+#       sql = "INSERT INTO attempts (student_id , variant_id, teacher_discipline_id, attempt_num, mark, date_of_exam) VALUES ('#{student["id"]}', '#{@var}', '#{@td}', 1, '#{mark}', '#{date_win}')  "
+#       ActiveRecord::Base.connection.exec_query(sql)
+#     end
 #   end
-#   date = Faker::Date.between(from: '2022-01-01', to: '2024-01-01')
-#   sql = "INSERT INTO attempts (student_id , discipline_id , variant_id, date) VALUES ('#{student_id}', '#{discipline_id}', '#{@variant_id}', '#{date}')  "
+
+#   sec_sql = "select * from attempts, students where attempt_num = '1' and mark = '2' and students.id = attempts.student_id and students.date_of_entering between '#{@year}-08-17' and '#{@year}-08-27' and date_of_exam between '#{@year+k}-01-15' and '#{@year+k}-01-25'"
+#   res_sec = ActiveRecord::Base.connection.exec_query(sec_sql)
+#   res_sec.each do |el| 
+#     mark = rand(2..5)
+#     year, month, day = el["date_of_exam"].split('-').map(&:to_i)
+#     date_test = Date.new(year, month, day) + 30
+#     date_of_exam = date_test.strftime('%Y-%m-%d')
+#     sql = "INSERT INTO attempts (student_id , variant_id, teacher_discipline_id, attempt_num, mark, date_of_exam) VALUES ('#{el["student_id"]}', '#{el["variant_id"]}', '#{el["teacher_discipline_id"]}', 2, '#{mark}', '#{date_of_exam}')  "
+#     ActiveRecord::Base.connection.exec_query(sql)
+#   end
+
+#   third_sql = "select * from attempts, students where attempt_num = '2' and mark = '2' and students.id = attempts.student_id and students.date_of_entering between '#{@year}-08-17' and '#{@year}-08-27' and date_of_exam between '#{@year+k}-01-31' and '#{@year+k}-02-25'"
+#   res_third = ActiveRecord::Base.connection.exec_query(third_sql)
+#   res_third.each do |el| 
+#     mark = rand(2..5)
+#     year, month, day = el["date_of_exam"].split('-').map(&:to_i)
+#     date_test = Date.new(year, month, day) + 30
+#     date_of_exam = date_test.strftime('%Y-%m-%d')
+#     sql = "INSERT INTO attempts (student_id , variant_id, teacher_discipline_id, attempt_num, mark, date_of_exam) VALUES ('#{el["student_id"]}', '#{el["variant_id"]}', '#{el["teacher_discipline_id"]}', 3, '#{mark}', '#{date_of_exam}')  "
+#     ActiveRecord::Base.connection.exec_query(sql)
+#   end
+
+#   otchisl = "select * from attempts where attempt_num = '3' and mark = '2' and date_of_exam between '#{@year+k}-03-01' and '#{@year+k}-03-31'"
+#   res_otchs = ActiveRecord::Base.connection.exec_query(otchisl)
+#   res_otchs.each do |el| 
+#     sql = "update students set status = 'false' where id = '#{el["student_id"]}'"
+#     ActiveRecord::Base.connection.exec_query(sql)
+#   end
+
+
+#   presql = "SELECT * FROM students where (date_of_entering = '#{@year}-08-17' or date_of_entering = '#{@year}-08-20' or date_of_entering = '#{@year}-08-27') and status = true"
+#   res = ActiveRecord::Base.connection.exec_query(presql)
+
+#   res.each do |student| 
+#     4.times do 
+#       date_sum = Faker::Date.between(from: "#{@year+k}-06-12", to: "#{@year+k}-06-29")
+
+#       dissql = "select * from disciplines order by random() limit 1"
+#       res_dis = ActiveRecord::Base.connection.exec_query(dissql)
+#       res_dis.each {|el| @dis = el["id"]}
+
+#       tdsql = "select * from teachers_disciplines where discipline_id = '#{@dis}' order by random() limit 1"
+#       res_td = ActiveRecord::Base.connection.exec_query(tdsql)
+#       res_td.each {|el| @td = el["id"]}
+
+#       qesql = "select * from questions where discipline_id = '#{@dis}' order by random() limit 1"
+#       resqe = ActiveRecord::Base.connection.exec_query(qesql)
+#       resqe.each {|el| @qest_id = el["id"]}
+
+#       varsql = "select * from variants where question_1 = '#{@qest_id}' or question_2 = '#{@qest_id}' order by random() limit 1"
+#       resvar = ActiveRecord::Base.connection.exec_query(varsql)
+#       resvar.each {|el| @var = el["id"]}
+
+#       mark = rand(2..5)
+#       sql = "INSERT INTO attempts (student_id , variant_id, teacher_discipline_id, attempt_num, mark, date_of_exam) VALUES ('#{student["id"]}', '#{@var}', '#{@td}', 1, '#{mark}', '#{date_sum}')  "
+#       ActiveRecord::Base.connection.exec_query(sql)
+#     end
+#   end
+
+#   sec_sql = "select * from attempts, students where attempt_num = '1' and mark = '2' and students.id = attempts.student_id and students.date_of_entering between '#{@year}-08-17' and '#{@year}-08-27' and date_of_exam between '#{@year+k}-06-12' and '#{@year+k}-06-29'"
+#   res_sec = ActiveRecord::Base.connection.exec_query(sec_sql)
+#   res_sec.each do |el| 
+#     mark = rand(2..5)
+#     year, month, day = el["date_of_exam"].split('-').map(&:to_i)
+#     date_test = Date.new(year, month, day) + 30
+#     date_of_exam = date_test.strftime('%Y-%m-%d')
+#     sql = "INSERT INTO attempts (student_id , variant_id, teacher_discipline_id, attempt_num, mark, date_of_exam) VALUES ('#{el["student_id"]}', '#{el["variant_id"]}', '#{el["teacher_discipline_id"]}', 2, '#{mark}', '#{date_of_exam}')  "
+#     ActiveRecord::Base.connection.exec_query(sql)
+#   end
+
+#   third_sql = "select * from attempts, students where attempt_num = '2' and mark = '2' and students.id = attempts.student_id and students.date_of_entering between '#{@year}-08-17' and '#{@year}-08-27' and date_of_exam between '#{@year+k}-07-12' and '#{@year+k}-07-29'"
+#   res_third = ActiveRecord::Base.connection.exec_query(third_sql)
+#   res_third.each do |el| 
+#     mark = rand(2..5)
+#     year, month, day = el["date_of_exam"].split('-').map(&:to_i)
+#     date_test = Date.new(year, month, day) + 30
+#     date_of_exam = date_test.strftime('%Y-%m-%d')
+#     sql = "INSERT INTO attempts (student_id , variant_id, teacher_discipline_id, attempt_num, mark, date_of_exam) VALUES ('#{el["student_id"]}', '#{el["variant_id"]}', '#{el["teacher_discipline_id"]}', 3, '#{mark}', '#{date_of_exam}')  "
+#     ActiveRecord::Base.connection.exec_query(sql)
+#   end
+
+#   otchisl = "select * from attempts where attempt_num = '3' and mark = '2' and date_of_exam between '#{@year+k}-08-01' and '#{@year+k}-08-31'"
+#   res_otchs = ActiveRecord::Base.connection.exec_query(otchisl)
+#   res_otchs.each do |el| 
+#     sql = "update students set status = 'false' where id = '#{el["student_id"]}'"
+#     ActiveRecord::Base.connection.exec_query(sql)
+#   end
+# k += 1
+# end
+
+# delsql = "delete from students where person_id between 241001 and 261000"
+# #delsql = "select * from students where date_of_entering between '2023-01-01' and '2023-12-31' "
+# res = ActiveRecord::Base.connection.exec_query(delsql)
+# res.each do |el|
+#   sql = "delete from students where id = '#{el["id"]}'"
 #   ActiveRecord::Base.connection.exec_query(sql)
+#   p 'OK'
 # end
 
 
 
-
-
-
+#300 150 50
 
 #FIXING VAR_NUM
 # i = 1
