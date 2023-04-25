@@ -1,0 +1,16 @@
+<h4>Создание человека</h4>
+<%= form_with url: '/students/create', method: :post do |form| %>
+  <p><%= form.label :first_name, "Введите имя" %></p>
+  <p><%= form.text_field :first_name, placeholder: 'Имя', class: 'form-control', id: 'first_name' %></p>
+  <p><%= form.label :second_name, "Введите фамилию" %></p>
+  <p><%= form.text_field :second_name, placeholder: 'Фамилия', class: 'form-control', id: 'second_name'%></p>
+  <p><%= form.label :patronymic, "Введите отчество" %></p>
+  <p><%= form.text_field :patronymic, placeholder: 'Отчество', class: 'form-control', id: 'patronymic'%></p>
+  <%= form.radio_button :quota, 'Платное' %> Платное
+  <%= form.radio_button :quota, 'Бюджет' %> Бюджет
+  <p><%= form.label :patronymic, "Выберите дату поступления" %></p>
+  <p><%= form.date_field :date_of_entering, class: 'form-control', id: 'date_of_entering'%>
+  <p><%= form.submit("Создать", id: 'btn') %></p>
+<% end %>
+
+<div id='error_response-container'></div>

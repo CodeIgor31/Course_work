@@ -1,3 +1,4 @@
+<li><strong><button type="button" class="btn btn-outline-light me-2 text-bg-dark"><%= link_to "Добавить студента", studnew_path, class: 'nav-link px-2 text-white' %></button></strong></li>
 <table class="table">
   <thead>
     <tr>
@@ -25,6 +26,24 @@
       <td><%= @patronymic %></td>
       <td><%= el["quota"] %></td>
       <td><%= el["date_of_entering"] %></td>
+                <td>
+                    <div class="container">
+                        <div class="row">
+                            <div class='col-auto'>
+                                <%= form_with url: "/students/edit/#{el["id"]}", method: :post do |form| %>
+                                <button type="submit" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                Изменить
+                                </button>
+                                <% end %> 
+                            </div>
+                            <div class='col-auto'>
+                                <%= form_with url: "/students/destroy/#{el["id"]}" do |form| %>
+                                    <button type="submit" class="btn-close" aria-label="Закрыть"></button>
+                                <% end %>  
+                            </div>
+                        </div>
+                    </div>
+                </td>
     </tr>
   </tbody>
 <%end%>
