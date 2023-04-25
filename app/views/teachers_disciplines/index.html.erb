@@ -1,0 +1,35 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Имя</th>
+      <th scope="col">Фамилия</th>
+      <th scope="col">Отчество</th>
+      <th scope="col">Дисциплина</th>
+      <th scope="col">Преподает в данный момент</th>
+    </tr>
+  </thead>
+<% @teach_disc.each do |el| %>
+<% sql = "select first_name, second_name, patronymic from persons, teachers where teachers.id = '#{el["teacher_id"]}' and persons.id = teachers.person_id"%>
+<% ressql = ActiveRecord::Base.connection.exec_query(sql) %>
+<% sql = "select name from disciplines where id = '#{el["discipline_id"]}'"%>
+<% name = ActiveRecord::Base.connection.exec_query(sql) %>
+<%name.each {|el| @discipline = el["name"]}%>
+<% ressql.each do |elem|%>
+  <% @first_name = elem["first_name"]%>
+  <% @second_name = elem["second_name"]%>
+  <% @patronymic = elem["patronymic"]%>
+  <% end %>
+  <% el["status"] == true ? @status = 'Да' : @status = 'Нет'%>
+  <tbody>
+    <tr>
+      <th scope="row"><%= el["id"] %></th>
+      <td><%= @first_name %></td>
+      <td><%= @second_name %></td>
+      <td><%= @patronymic %></td>
+      <td><%= @discipline %></td>
+      <td><%= @status %></td>
+    </tr>
+  </tbody>
+<%end%>
+</table>

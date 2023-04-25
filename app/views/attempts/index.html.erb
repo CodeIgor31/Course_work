@@ -1,0 +1,40 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Студент</th>
+      <th scope="col">Вариант</th>
+      <th scope="col">Преподаватель</th>
+      <th scope="col">Дисциплина</th>
+      <th scope="col">Номер попытки</th>
+      <th scope="col">Оценка(по 5-и бальной шкале)</th>
+      <th scope="col">Дата сдачи экзамена</th>
+    </tr>
+  </thead>
+<% @attempts.each do |el| %>
+<% sql = "select first_name, second_name, patronymic from persons, students where students.id = '#{el["student_id"]}' and persons.id = students.person_id"%>
+<% firsql = ActiveRecord::Base.connection.exec_query(sql) %>
+<% sql = "select var_name from variants where id = '#{el["variant_id"]}'"%>
+<% secsql = ActiveRecord::Base.connection.exec_query(sql) %>
+<% sql = "select first_name, second_name, patronymic from persons, teachers, teachers_disciplines where teachers.id = teachers_disciplines.teacher_id and persons.id = teachers.person_id and teachers_disciplines.id = '#{el["teacher_discipline_id"]}'"%>
+<% thisql = ActiveRecord::Base.connection.exec_query(sql) %>
+<% sql = "select name from disciplines, teachers_disciplines where teachers_disciplines.id = '#{el["teacher_discipline_id"]}' and teachers_disciplines.discipline_id = disciplines.id"%>
+<% foursql = ActiveRecord::Base.connection.exec_query(sql) %>
+<%firsql.each {|el| @fio = "#{el['second_name']} #{el['first_name']} #{el['patronymic']}"}%>
+<%secsql.each {|el| @variant = el["var_name"]}%>
+<%thisql.each {|el| @fio_teach = "#{el['second_name']} #{el['first_name']} #{el['patronymic']}"}%>
+<%foursql.each {|el| @discipline = el["name"]}%>
+  <tbody>
+    <tr>
+      <th scope="row"><%= el["id"] %></th>
+      <td><%= @fio %></td>
+      <td><%= @variant %></td>
+      <td><%= @fio_teach %></td>
+      <td><%= @discipline %></td>
+      <td><%= el["attempt_num"] %></td>
+      <td><%= el["mark"] %></td>
+      <td><%= el["date_of_exam"] %></td>
+    </tr>
+  </tbody>
+<%end%>
+</table>

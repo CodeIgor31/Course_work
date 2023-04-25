@@ -656,3 +656,14 @@ Faker::Config.locale = :ru
 #     i += 1
 #   end
 # end
+
+# FIXING ROLES
+  # presql = "select * from persons where role_id = 'S'" 
+  # res = ActiveRecord::Base.connection.exec_query(presql)
+  # res.each do |hash|
+  #     sql = "update persons set role_id = 'Студент' where id = '#{hash["id"]}'"
+  #     ActiveRecord::Base.connection.exec_query(sql)
+  # end
+
+      # sql = "update students set quota = 'Платное' where quota = 'P'"
+      # ActiveRecord::Base.connection.exec_query(sql)

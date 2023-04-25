@@ -1,0 +1,22 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Имя</th>
+      <th scope="col">Фамилия</th>
+      <th scope="col">Отчество</th>
+      <th scope="col">Должность</th>
+    </tr>
+  </thead>
+<% @persons.each do |el| %>
+  <tbody>
+    <tr>
+      <th scope="row"><%= el["id"] %></th>
+      <td><%= el["first_name"] %></td>
+      <td><%= el["second_name"] %></td>
+      <td><%= el["patronymic"] %></td>
+      <td><%= el["role_id"] %></td>
+    </tr>
+  </tbody>
+<%end%>
+</table>

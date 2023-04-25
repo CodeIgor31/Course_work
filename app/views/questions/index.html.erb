@@ -1,0 +1,27 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Вопрос</th>
+      <th scope="col">Часть</th>
+      <th scope="col">Ответ</th>
+      <th scope="col">Оценка(В баллах)</th>
+      <th scope="col">Дисциплина</th>
+    </tr>
+  </thead>
+<% @questions.each do |el| %>
+<% sql = "select name from disciplines where id = '#{el["discipline_id"]}'"%>
+<% ressql = ActiveRecord::Base.connection.exec_query(sql) %>
+<% ressql.each {|elem| @res = elem["name"]}%>
+  <tbody>
+    <tr>
+      <th scope="row"><%= el["id"] %></th>
+      <td><%= el["question"] %></td>
+      <td><%= el["part"] %></td>
+      <td><%= el["answer"] %></td>
+      <td><%= el["mark"] %></td>
+      <td><%= @res %></td>
+    </tr>
+  </tbody>
+<%end%>
+</table>

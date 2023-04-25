@@ -1,0 +1,19 @@
+<header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom header">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+        <span class="fs-4"><strong><span class='purple'>Внутренний экзамен университета</span></strong></span>
+      <div class='text-right'>
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-3 mb-md-0">
+              <li><strong><button type="button" class="btn btn-outline-light me-2 text-bg-dark"><%= link_to "Главная страница", home_path, class: 'nav-link px-2 text-white' %></button></strong></li>
+            <li><strong><button type="button" class="btn btn-outline-light me-2 text-bg-dark"><%= link_to "Преподаватели и дисциплины", tdis_path, class: 'nav-link px-2 text-white' %></button></strong></li>
+            <li><strong><button type="button" class="btn btn-outline-light me-2 text-bg-dark"><%= link_to "Студенты", students_path, class: 'nav-link px-2 text-white' %></button></strong></li>
+             <li><strong><button type="button" class="btn btn-outline-light me-2 text-bg-dark"><%= link_to "Преподаватели", teachers_path, class: 'nav-link px-2 text-white' %></button></strong></li>
+            <li><strong><button type="button" class="btn btn-outline-light me-2 text-bg-dark"><%= link_to "Все люди", persons_path, class: 'nav-link px-2 text-white' %></button></strong></li>
+            <li><strong><button type="button" class="btn btn-outline-light me-2 text-bg-dark"><%=link_to "Дисциплины", disciplines_path, class: 'nav-link px-2 text-white' %></button></strong></li>
+            <li><strong><button type="button" class="btn btn-outline-light me-2 text-bg-dark"><%= link_to "Вопросы", questions_path, class: 'nav-link px-2 text-white' %></button></strong></li>
+            <li><strong><button type="button" class="btn btn-outline-light me-2 text-bg-dark"><%= link_to "Варианты", variants_path, class: 'nav-link px-2 text-white' %></button></strong></li>
+            <li><strong><button type="button" class="btn btn-outline-light me-2 text-bg-dark"><%= link_to "Попытки", attempts_path, class: 'nav-link px-2 text-white' %></button></strong></li>
+        </ul>
+         </div>
+      </a>
+    </header>

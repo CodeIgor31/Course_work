@@ -1,0 +1,16 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Название дисциплины</th>
+    </tr>
+  </thead>
+<% @disciplines.each do |el| %>
+  <tbody>
+    <tr>
+      <th scope="row"><%= el["id"] %></th>
+      <td><%= el["name"] %></td>
+    </tr>
+  </tbody>
+<%end%>
+</table>

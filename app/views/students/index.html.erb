@@ -1,0 +1,31 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Имя</th>
+      <th scope="col">Фамилия</th>
+      <th scope="col">Отчество</th>
+      <th scope="col">Квота</th>
+      <th scope="col">Дата поступления</th>
+    </tr>
+  </thead>
+<% @students.each do |el| %>
+<% sql = "select first_name, second_name, patronymic from persons where id = '#{el["person_id"]}'"%>
+<% ressql = ActiveRecord::Base.connection.exec_query(sql) %>
+<% ressql.each do |elem|%>
+  <% @first_name = elem["first_name"]%>
+  <% @second_name = elem["second_name"]%>
+  <% @patronymic = elem["patronymic"]%>
+  <% end %>
+  <tbody>
+    <tr>
+      <th scope="row"><%= el["id"] %></th>
+      <td><%= @first_name %></td>
+      <td><%= @second_name %></td>
+      <td><%= @patronymic %></td>
+      <td><%= el["quota"] %></td>
+      <td><%= el["date_of_entering"] %></td>
+    </tr>
+  </tbody>
+<%end%>
+</table>

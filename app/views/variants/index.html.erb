@@ -1,0 +1,26 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Название варианта</th>
+      <th scope="col">Вопрос 1</th>
+      <th scope="col">Вопрос 2</th>
+    </tr>
+  </thead>
+<% @variants.each do |el| %>
+<% sql = "select question from questions where id = '#{el["question_1"]}'"%>
+<% firsql = ActiveRecord::Base.connection.exec_query(sql) %>
+<% sql = "select question from questions where id = '#{el["question_2"]}'"%>
+<% secsql = ActiveRecord::Base.connection.exec_query(sql) %>
+<%firsql.each {|el| @question_1 = el["question"]}%>
+<%secsql.each {|el| @question_2 = el["question"]}%>
+  <tbody>
+    <tr>
+      <th scope="row"><%= el["id"] %></th>
+      <td><%= el["var_name"] %></td>
+      <td><%= @question_1 %></td>
+      <td><%= @question_2 %></td>
+    </tr>
+  </tbody>
+<%end%>
+</table>
