@@ -1,7 +1,7 @@
 <div class="row p-2">
     <div class='col-auto'>
         <%= form_with class: "d-flex", url: "/teachers_disciplines/create", method: :post do |form| %>
-            <button type="submit" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            <button type="submit" class="btn btn-outline-light me-2 text-bg-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                 Добавить преподавателя
             </button>
           <% end %>
@@ -53,7 +53,7 @@
                         <div class="row">
                             <div class='col-auto'>
                                 <%= form_with url: "/teachers_disciplines/edit/#{el["id"]}", method: :post do |form| %>
-                                <button type="submit" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                <button type="submit" class="btn btn-outline-light me-2 text-bg-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                 Изменить
                                 </button>
                                 <% end %> 

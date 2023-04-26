@@ -1,13 +1,21 @@
 <li><strong><button type="button" class="btn btn-outline-light me-2 text-bg-dark"><%= link_to "Добавить студента", studnew_path, class: 'nav-link px-2 text-white' %></button></strong></li>
+<div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-content" id="m-body">
+        
+      </div>
+  </div>
+</div>
 <table class="table">
   <thead>
     <tr>
       <th scope="col">id</th>
-      <th scope="col">Имя</th>
       <th scope="col">Фамилия</th>
+      <th scope="col">Имя</th>
       <th scope="col">Отчество</th>
       <th scope="col">Квота</th>
       <th scope="col">Дата поступления</th>
+      <th scope="col">Статус</th>
     </tr>
   </thead>
 <% @students.each do |el| %>
@@ -21,17 +29,18 @@
   <tbody>
     <tr>
       <th scope="row"><%= el["id"] %></th>
-      <td><%= @first_name %></td>
       <td><%= @second_name %></td>
+      <td><%= @first_name %></td>
       <td><%= @patronymic %></td>
       <td><%= el["quota"] %></td>
       <td><%= el["date_of_entering"] %></td>
+      <td><%= el["status"] == true ? 'Учится' : 'Отчислен' %></td>
                 <td>
                     <div class="container">
                         <div class="row">
                             <div class='col-auto'>
                                 <%= form_with url: "/students/edit/#{el["id"]}", method: :post do |form| %>
-                                <button type="submit" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                <button type="submit" class="btn btn-outline-light me-2 text-bg-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                 Изменить
                                 </button>
                                 <% end %> 

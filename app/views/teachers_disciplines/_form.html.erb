@@ -1,11 +1,8 @@
 <% if tdis == nil %>
         <%= form_with url: '/teachers_disciplines/add', method: :post do |form| %>
-          <p><%= form.label :first_name, "Введите имя" %></p>
-          <p><%= form.text_field :first_name, placeholder: 'Имя', class: 'form-control', id: 'first_name' %></p>
-          <p><%= form.label :second_name, "Введите фамилию" %></p>
-          <p><%= form.text_field :second_name, placeholder: 'Фамилия', class: 'form-control', id: 'second_name'%></p>
-          <p><%= form.label :patronymic, "Введите отчество" %></p>
-          <p><%= form.text_field :patronymic, placeholder: 'Отчество', class: 'form-control', id: 'patronymic'%></p>
+          <p><%= form.label :teacher_id, "Выберите преподавателя" %></p>
+          <p><%= form.select :teacher_id, Teacher.all.map {|el| ["#{Person.find_by(id: el.person_id).second_name} #{Person.find_by(id: el.person_id).first_name} #{Person.find_by(id: el.person_id).patronymic}", el.id]}%></p>
+          <p><%= form.label :discipline_id, "Выберите дисциплины" %></p>
           <%= form.select :discipline_id, Discipline.all.map {|el| [el.name, el.id]}, {}, {:multiple=>true} %>
           <p><%= form.submit("Добавить", id: 'btn') %></p>
         <% end %>
@@ -17,6 +14,7 @@
         <%= form_with url: "/teachers_disciplines/update/#{tdis.id}", method: :post do |form| %>
           <p><%= form.label :teacher_id, "Выберите преподавателя" %></p>
           <p><%= form.select :teacher_id, Teacher.all.map {|el| ["#{Person.find_by(id: el.person_id).second_name} #{Person.find_by(id: el.person_id).first_name} #{Person.find_by(id: el.person_id).patronymic}", el.id]}%></p>
+          <p><%= form.label :discipline_id, "Выберите дисциплины" %></p>
           <%= form.select :discipline_id, Discipline.all.map {|el| [el.name, el.id]} %>
            <p>  <%= form.radio_button :status, 'true' %> Преподает
                  <%= form.radio_button :status, 'false' %> Не преподает</p>

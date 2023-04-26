@@ -8,9 +8,12 @@ Rails.application.routes.draw do
   get 'disciplines/index', as: 'disciplines'
   get 'questions/index', as: 'questions'
   get "persons/index", as: 'persons'
+  
   get 'students/new', as: 'studnew'
-  post 'students/create'
+  post 'students/create', to: "students#create"
   post "students/destroy/:id", to: "students#destroy"
+  post '/students/update/:id', to: "students#update"
+  post '/students/edit/:id', to: "students#edit"
 
   post '/teachers_disciplines/create', to: "teachers_disciplines#create"
   post '/teachers_disciplines/add', to: "teachers_disciplines#add"

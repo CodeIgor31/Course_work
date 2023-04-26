@@ -17,7 +17,14 @@ class StudentsController < ApplicationController
     redirect_to students_path
   end
 
+  def edit
+    @student = Student.find_by(id: params[:id])
+  end
+
   def update
+    @student = Student.find_by(id: params[:id])
+    @student.update({ quota: params[:quota], date_of_entering: params[:date_of_entering], status: params[:status] })
+    redirect_to '/students'
   end
 
   def destroy
