@@ -1,0 +1,9 @@
+        <%= form_with url: "/persons/update/#{person.id}", method: :post do |form| %>
+          <%= form.radio_button :role_id, 'Преподаватель' %> Преподаватель
+          <%= form.radio_button :role_id, 'Студент' %> Студент</p>
+          <p><%= form.submit("Изменить", id: 'btn') %></p>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+      </div>

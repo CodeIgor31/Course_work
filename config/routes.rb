@@ -26,4 +26,7 @@ Rails.application.routes.draw do
   post '/teachers/destroy/:id', to: "teachers#destroy"
   post '/teachers/update/:id', to: "teachers#update"
   post '/teachers/edit/:id', to: "teachers#edit"
+
+  post '/persons/update/:id', to: "persons#update"
+  post '/persons/edit/:id', to: "persons#edit"
 end
