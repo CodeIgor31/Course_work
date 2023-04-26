@@ -1,6 +1,6 @@
 class TeachersController < ApplicationController
   def index
-    sql = "select * from teachers order by id desc"
+    sql = "select * from teachers order by id desc limit 500"
     @teachers = ActiveRecord::Base.connection.exec_query(sql)
   end
 
