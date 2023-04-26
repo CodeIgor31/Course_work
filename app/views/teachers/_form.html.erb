@@ -1,0 +1,29 @@
+<% if person == nil %>
+        <%= form_with url: '/teachers/add', method: :post do |form| %>
+          <p><%= form.label :first_name, "Введите имя" %></p>
+          <p><%= form.text_field :first_name, placeholder: 'Имя', class: 'form-control', id: 'first_name' %></p>
+          <p><%= form.label :second_name, "Введите фамилию" %></p>
+          <p><%= form.text_field :second_name, placeholder: 'Фамилия', class: 'form-control', id: 'second_name'%></p>
+          <p><%= form.label :patronymic, "Введите отчество" %></p>
+          <p><%= form.text_field :patronymic, placeholder: 'Отчество', class: 'form-control', id: 'patronymic'%></p>
+          <p><%= form.submit("Добавить", id: 'btn') %></p>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+      </div>
+<%else%>
+        <%= form_with url: "/teachers/update/#{person.id}", method: :post do |form| %>
+          <p><%= form.label :first_name, "Введите имя" %></p>
+          <p><%= form.text_field :first_name, value: person.first_name, placeholder: 'Имя', class: 'form-control', id: 'first_name' %></p>
+          <p><%= form.label :second_name, "Введите фамилию" %></p>
+          <p><%= form.text_field :second_name, value: person.second_name, placeholder: 'Фамилия', class: 'form-control', id: 'second_name'%></p>
+          <p><%= form.label :patronymic, "Введите отчество" %></p>
+          <p><%= form.text_field :patronymic, value: person.patronymic, placeholder: 'Отчество', class: 'form-control', id: 'patronymic'%></p>
+          <p><%= form.submit("Изменить", id: 'btn') %></p>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+      </div>
+<% end %>

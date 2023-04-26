@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get 'disciplines/index', as: 'disciplines'
   get 'questions/index', as: 'questions'
   get "persons/index", as: 'persons'
-  
+
   get 'students/new', as: 'studnew'
   post 'students/create', to: "students#create"
   post "students/destroy/:id", to: "students#destroy"
@@ -20,4 +20,10 @@ Rails.application.routes.draw do
   post '/teachers_disciplines/destroy/:id', to: "teachers_disciplines#destroy"
   post '/teachers_disciplines/update/:id', to: "teachers_disciplines#update"
   post '/teachers_disciplines/edit/:id', to: "teachers_disciplines#edit"
+
+  post '/teachers/create', to: "teachers#create"
+  post '/teachers/add', to: "teachers#add"
+  post '/teachers/destroy/:id', to: "teachers#destroy"
+  post '/teachers/update/:id', to: "teachers#update"
+  post '/teachers/edit/:id', to: "teachers#edit"
 end
