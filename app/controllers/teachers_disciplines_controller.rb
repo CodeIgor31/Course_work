@@ -8,17 +8,6 @@ class TeachersDisciplinesController < ApplicationController
   end
 
   def add
-    # @pers = Person.new({first_name: params[:first_name], second_name: params[:second_name], patronymic: params[:patronymic], role_id: 'Преподаватель'})
-    # return unless @pers.save
-    # @pers = Person.last
-    # disc = params[:discipline_id]
-    # disc[1..].each do |note|
-    #   @teacher = Teacher.create({person_id: @pers.id})
-    #   @tdis = TeacherDiscipline.new({teacher_id: @teacher.id, discipline_id: note.to_i, status: true})
-    #   return unless @teacher.save
-    #   return unless @tdis.save
-    # end
-    # flash[:notice] = 'Успех'
     @teacher = Teacher.find_by(id: params[:teacher_id])
     @tdis = TeacherDiscipline.create({teacher_id: @teacher.id, discipline_id: params[:discipline_id], status: true})
     redirect_to tdis_path

@@ -1,0 +1,21 @@
+<% if discipline == nil %>
+        <%= form_with url: '/disciplines/add', method: :post do |form| %>
+          <p><%= form.label :name, "Выберите название дисциплины" %></p>
+          <p><%= form.text_field :name, class: 'form-control', id: 'dis_name' %></p>
+          <p><%= form.submit("Добавить", id: 'btn') %></p>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+      </div>
+<%else%>
+        <%= form_with url: "/disciplines/update/#{discipline.id}", method: :post do |form| %>
+          <p><%= form.label :name, "Изменить название дисциплины" %></p>
+          <p><%= form.text_field :name, value: discipline.name, class: 'form-control', id: 'dis_name' %></p>
+          <p><%= form.submit("Изменить", id: 'btn') %></p>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+      </div>
+<% end %>

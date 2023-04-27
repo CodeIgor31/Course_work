@@ -1,0 +1,21 @@
+<%= form_with url: '/attempts/add_oth', method: :post do |form| %>
+  <p><%= form.label :attempt_num, "Выберите номер попытки" %></p>
+  <p><%= form.radio_button :attempt_num, '1' %>1
+    <%= form.radio_button :attempt_num, '2' %>2
+    <%= form.radio_button :attempt_num, '3' %>3</p>
+    <p><%= form.label :mark, "Поставьте оценку" %></p>
+  <p><%= form.radio_button :mark, '2' %>2
+    <%= form.radio_button :mark, '3' %>3
+    <%= form.radio_button :mark, '4' %>4
+    <%= form.radio_button :mark, '5' %>5</p>
+     <p><%= form.label :date_of_exam, "Выберите дату экзамена" %></p>
+  <p><%= form.date_field :date_of_exam, class: 'form-control', id: 'date_of_exam'%></p>
+  <br>
+     <div class='col-auto'>
+    <%= submit_tag("Добавить", class: "btn btn-info", id: 'btn') %>
+</div> 
+<% end %>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+</div>

@@ -29,4 +29,39 @@ Rails.application.routes.draw do
 
   post '/persons/update/:id', to: "persons#update"
   post '/persons/edit/:id', to: "persons#edit"
+
+  post '/disciplines/create', to: "disciplines#create"
+  post '/disciplines/add', to: "disciplines#add"
+  post '/disciplines/destroy/:id', to: "disciplines#destroy"
+  post '/disciplines/update/:id', to: "disciplines#update"
+  post '/disciplines/edit/:id', to: "disciplines#edit"
+
+  post '/questions/create', to: "questions#create"
+  post '/questions/add', to: "questions#add"
+  post '/questions/destroy/:id', to: "questions#destroy"
+  post '/questions/update/:id', to: "questions#update"
+  post '/questions/edit/:id', to: "questions#edit"
+
+  post '/variants/create', to: "variants#create"
+  post '/variants/add', to: "variants#add"
+  post '/variants/destroy/:id', to: "variants#destroy"
+
+
+
+  post '/attempts/create', to: "attempts#create"
+  post '/attempts/add_student', to: "attempts#add_student"
+
+  post '/attempts/add_discipline', to: "attempts#add_discipline"
+  post '/attempts/add_dis', to: "attempts#add_dis"
+
+  post '/attempts/add_variant', to: "attempts#add_variant"
+  post '/attempts/add_var', to: "attempts#add_var"
+
+  post '/attempts/add_teacher', to: "attempts#add_teacher"
+  post '/attempts/add_tea', to: "attempts#add_tea"
+
+  post '/attempts/add_other', to: "attempts#add_other"
+  post '/attempts/add_oth', to: "attempts#add_oth"
+
+  post '/attempts/destroy/:id', to: "attempts#destroy"
 end

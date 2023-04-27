@@ -1,0 +1,39 @@
+<% if question == nil %>
+        <%= form_with url: '/questions/add', method: :post do |form| %>
+          <p><%= form.label :question, "Напишите вопрос" %></p>
+          <p><%= form.text_field :question, class: 'form-control', id: 'question'%>
+          <p><%= form.label :part, "Выберите часть" %></p>
+          <%= form.radio_button :part, 'A' %> Тестовая(А)
+          <%= form.radio_button :part, 'B' %> С развернутым ответом(В)</p>
+          <p><%= form.label :answer, "Добавьте ответ" %></p>
+          <p><%= form.text_field :answer, class: 'form-control', id: 'answer'%>
+          <p><%= form.label :mark, "Количество баллов за ответ" %></p>
+          <p><%= form.text_field :mark, class: 'form-control', id: 'mark'%>
+          <p><%= form.label :discipline_id, "Выберите дисциплину" %></p>
+          <%= form.select :discipline_id, Discipline.all.map {|el| [el.name, el.id]} %>
+          <p><%= form.submit("Добавить", id: 'btn') %></p>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+      </div>
+<%else%>
+        <%= form_with url: "/questions/update/#{question.id}", method: :post do |form| %>
+          <p><%= form.label :question, "Напишите вопрос" %></p>
+          <p><%= form.text_field :question, value: question.question, class: 'form-control', id: 'question'%>
+          <p><%= form.label :part, "Выберите часть" %></p>
+          <%= form.radio_button :part, 'A' %> Тестовая(А)
+          <%= form.radio_button :part, 'B' %> С развернутым ответом(В)</p>
+          <p><%= form.label :answer, "Добавьте ответ" %></p>
+          <p><%= form.text_field :answer, value: question.answer, class: 'form-control', id: 'answer'%>
+          <p><%= form.label :mark, "Количество баллов за ответ" %></p>
+          <p><%= form.text_field :mark, value: question.mark, class: 'form-control', id: 'mark'%>
+          <p><%= form.label :discipline_id, "Выберите дисциплину" %></p>
+          <%= form.select :discipline_id, Discipline.all.map {|el| [el.name, el.id]}%>
+          <p><%= form.submit("Изменить", id: 'btn') %></p>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+      </div>
+<% end %>

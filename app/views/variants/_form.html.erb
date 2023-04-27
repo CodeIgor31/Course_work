@@ -1,0 +1,9 @@
+        <%= form_with url: '/variants/add', method: :post do |form| %>
+          <p><%= form.label :discipline_id, "Выберите дисциплину и вариант сгенерируется автоматически" %></p>
+          <%= form.select :discipline_id, Discipline.all.map {|el| [el.name, el.id]} %>
+          <p><%= form.submit("Добавить", id: 'btn') %></p>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+      </div>

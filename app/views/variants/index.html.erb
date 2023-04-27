@@ -1,3 +1,20 @@
+<div class="row p-2">
+    <div class='col-auto'>
+        <%= form_with class: "d-flex", url: "/variants/create", method: :post do |form| %>
+            <button type="submit" class="btn btn-outline-light me-2 text-bg-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Добавить вариант
+            </button>
+          <% end %>
+    </div>
+
+</div>
+<div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-content" id="m-body">
+        
+      </div>
+  </div>
+</div>
 <table class="table">
   <thead>
     <tr>
@@ -20,6 +37,17 @@
       <td><%= el["var_name"] %></td>
       <td><%= @question_1 %></td>
       <td><%= @question_2 %></td>
+      <td>
+              <div class="container">
+                  <div class="row">
+                      <div class='col-auto'>
+                          <%= form_with url: "/variants/destroy/#{el["id"]}" do |form| %>
+                              <button type="submit" class="btn-close" aria-label="Закрыть"></button>
+                          <% end %>  
+                      </div>
+                  </div>
+              </div>
+     </td>
     </tr>
   </tbody>
 <%end%>

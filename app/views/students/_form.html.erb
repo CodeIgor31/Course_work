@@ -2,7 +2,7 @@
   <p><%= form.label :patronymic, "Выберите квоту" %></p>
   <%= form.radio_button :quota, 'Платное' %> Платное
   <%= form.radio_button :quota, 'Бюджет' %> Бюджет
-  <p><%= form.label :patronymic, "Выберите дату поступления" %></p>
+  <p><%= form.label :date_of_entering, "Выберите дату поступления" %></p>
   <p><%= form.date_field :date_of_entering, class: 'form-control', id: 'date_of_entering', value: student.date_of_entering %></p>
   <%= form.radio_button :status, 'true' %> Учится
   <%= form.radio_button :status, 'false' %> Отчислен

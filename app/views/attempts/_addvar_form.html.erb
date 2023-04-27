@@ -1,0 +1,14 @@
+<%= form_with url: '/attempts/add_var', method: :post do |form| %>
+  <p><%= form.label :variant_id, "Выберите вариант" %></p>
+  <p><%= form.select :variant_id, @res_vars%>
+  <div class='col-auto'>
+    <%= submit_tag("Сохранить", class: "btn btn-info", id: 'btn') %>
+  </div> 
+<% end %>
+<%= form_with url: "/attempts/add_teacher", method: :post do |form| %>
+    <%= submit_tag("Дальше", class: "btn btn-danger", id: 'btn') %>
+<% end %>   
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+</div>
