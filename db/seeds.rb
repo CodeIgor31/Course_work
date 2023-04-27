@@ -667,3 +667,17 @@ Faker::Config.locale = :ru
 
       # sql = "update students set quota = 'Платное' where quota = 'P'"
       # ActiveRecord::Base.connection.exec_query(sql)
+
+#fixing otchisl
+# i = 0
+# presql = "select * from students, attempts where students.id = attempts.student_id and attempts.attempt_num = 3 and attempts.mark = 2"
+# res = ActiveRecord::Base.connection.exec_query(presql)
+# res.each do |el|
+#   date = el["date_of_exam"].split('-')
+#   month = date[1]
+#   month == "08" ? date_of_otch = "#{date[0]}-09-03" : date_of_otch = "#{date[0]}-04-03"
+#   i += 1
+#   sql = "update students set date_of_otchislenie = '#{date_of_otch}' where students.id = '#{el["student_id"]}'"
+#   ActiveRecord::Base.connection.exec_query(sql)
+# end
+# p i

@@ -4,7 +4,7 @@
   <%= form.radio_button :quota, 'Бюджет' %> Бюджет
   <p><%= form.label :date_of_entering, "Выберите дату поступления" %></p>
   <p><%= form.date_field :date_of_entering, class: 'form-control', id: 'date_of_entering', value: student.date_of_entering %></p>
-  <%= form.radio_button :status, 'true' %> Учится
-  <%= form.radio_button :status, 'false' %> Отчислен
+  <p><%= form.label :date_of_otchislenie, "Выберите дату отчисления (Если надо)" %></p>
+  <p><%= form.date_field :date_of_otchislenie, class: 'form-control', id: 'date_of_otchislenie' %></p>
   <p><%= form.submit("Изменить", id: 'btn') %></p>
 <% end %>

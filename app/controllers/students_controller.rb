@@ -11,7 +11,7 @@ class StudentsController < ApplicationController
     return unless @pers.save
     flash[:notice] = 'Успех'
     @pers = Person.last
-    @student = Student.new({person_id: @pers.id, quota: params[:quota], date_of_entering: params[:date_of_entering], status: true})
+    @student = Student.new({person_id: @pers.id, quota: params[:quota], date_of_entering: params[:date_of_entering]})
     return unless @student.save
     flash[:notice] = 'Успех'
     redirect_to students_path
@@ -23,7 +23,7 @@ class StudentsController < ApplicationController
 
   def update
     @student = Student.find_by(id: params[:id])
-    @student.update({ quota: params[:quota], date_of_entering: params[:date_of_entering], status: params[:status] })
+    @student.update({ quota: params[:quota], date_of_entering: params[:date_of_entering], date_of_otchislenie: params[:date_of_otchislenie] })
     redirect_to '/students'
   end
 

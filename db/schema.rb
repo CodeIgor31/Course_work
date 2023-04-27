@@ -32,7 +32,7 @@ ActiveRecord::Schema[7.0].define(version: 0) do
     t.string "first_name", limit: 30, null: false
     t.string "second_name", limit: 30, null: false
     t.string "patronymic", limit: 30, null: false
-    t.string "role_id", limit: 1, null: false
+    t.string "role_id", limit: 30, null: false
   end
 
   create_table "questions", id: :serial, force: :cascade do |t|
@@ -47,7 +47,8 @@ ActiveRecord::Schema[7.0].define(version: 0) do
   create_table "students", id: :serial, force: :cascade do |t|
     t.serial "person_id", null: false
     t.date "date_of_entering", null: false
-    t.string "quota", limit: 1, null: false
+    t.string "quota", limit: 30, null: false
+    t.date "date_of_otchislenie"
   end
 
   create_table "teachers", id: :serial, force: :cascade do |t|

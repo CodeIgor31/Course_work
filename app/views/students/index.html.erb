@@ -15,7 +15,7 @@
       <th scope="col">Отчество</th>
       <th scope="col">Квота</th>
       <th scope="col">Дата поступления</th>
-      <th scope="col">Статус</th>
+      <th scope="col">Дата отчисления</th>
     </tr>
   </thead>
 <% @students.each do |el| %>
@@ -34,7 +34,7 @@
       <td><%= @patronymic %></td>
       <td><%= el["quota"] %></td>
       <td><%= el["date_of_entering"] %></td>
-      <td><%= el["status"] == true ? 'Учится' : 'Отчислен' %></td>
+      <td><%= el["date_of_otchislenie"] == nil ? '' : el["date_of_otchislenie"] %></td>
                 <td>
                     <div class="container">
                         <div class="row">
