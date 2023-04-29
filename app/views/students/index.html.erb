@@ -16,6 +16,7 @@
       <th scope="col">Квота</th>
       <th scope="col">Дата поступления</th>
       <th scope="col">Дата отчисления</th>
+      <th scope="col">Год выпуска</th>
     </tr>
   </thead>
 <% @students.each do |el| %>
@@ -35,6 +36,7 @@
       <td><%= el["quota"] %></td>
       <td><%= el["date_of_entering"] %></td>
       <td><%= el["date_of_otchislenie"] == nil ? '' : el["date_of_otchislenie"] %></td>
+      <td><%= el["year_of_out"] == nil ? '' : el["year_of_out"] %></td>
                 <td>
                     <div class="container">
                         <div class="row">

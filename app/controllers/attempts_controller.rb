@@ -2,7 +2,7 @@ class AttemptsController < ApplicationController
   include AttemptsHelper
   before_action :all_students
   def index
-    sql = "select * from attempts order by id desc limit 10"
+    sql = "select * from attempts order by id desc limit 50"
     @attempts = ActiveRecord::Base.connection.exec_query(sql)
   end
 

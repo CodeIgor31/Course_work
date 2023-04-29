@@ -49,6 +49,7 @@ ActiveRecord::Schema[7.0].define(version: 0) do
     t.date "date_of_entering", null: false
     t.string "quota", limit: 30, null: false
     t.date "date_of_otchislenie"
+    t.integer "year_of_out"
   end
 
   create_table "teachers", id: :serial, force: :cascade do |t|

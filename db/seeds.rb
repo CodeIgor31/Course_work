@@ -1,6 +1,6 @@
-require 'faker'
-require 'date'
-Faker::Config.locale = :ru
+# require 'faker'
+# require 'date'
+# Faker::Config.locale = :ru
 # full_name = Faker::Name.female_middle_name
 # puts full_name
 
@@ -379,7 +379,7 @@ Faker::Config.locale = :ru
 # end
 # p 'Person ready'
 
-#Inserting into Teachers
+# Inserting into Teachers
 # presql = "select * from persons where role_id = 'T'"
 # res = ActiveRecord::Base.connection.exec_query(presql)
 # res.each do |hash|
@@ -387,7 +387,7 @@ Faker::Config.locale = :ru
 #   ActiveRecord::Base.connection.exec_query(sql)
 # end
 
-#Inserting into Students
+# Inserting into Students
 # presql = "select * from persons where role_id = 'S' and id > 301000 "
 # res = ActiveRecord::Base.connection.exec_query(presql)
 # i = 1
@@ -395,11 +395,11 @@ Faker::Config.locale = :ru
 # quota = ["B", "P"]
 # date = ["#{year}-08-17", "#{year}-08-20"]
 # res.each do |pers|
-#   # if i > 20000
-#   #   i = 1
-#   #   year -= 1
-#   #   date = ["#{year}-08-17", "#{year}-08-20"]
-#   # end
+#   if i > 20000
+#     i = 1
+#     year -= 1
+#     date = ["#{year}-08-17", "#{year}-08-20"]
+#   end
 #   q = quota.sample
 #   if q == "P"
 #     d = "#{year}-08-27"
@@ -425,20 +425,20 @@ Faker::Config.locale = :ru
 # disciplines.each do |el|
 #   d_mas.push(el["id"])
 # end
-# # i = 0
-# # k = 0
+# i = 0
+# k = 0
 # 100.times do
-#   # if k > 346
-#   #   k = 0
-#   # end
+#   if k > 346
+#     k = 0
+#   end
 #   sql = "insert into teachers_disciplines (teacher_id, discipline_id, status) values('#{t_mas.sample}', '#{d_mas.sample}', false)"
 #   ActiveRecord::Base.connection.exec_query(sql)
-#   # i += 1
-#   # k += 1
+#   i += 1
+#   k += 1
 # end
 
 
-#Inserting into questions
+# Inserting into questions
 # i = 1
 # k = 1
 # 18000.times do
@@ -464,7 +464,7 @@ Faker::Config.locale = :ru
 #   ActiveRecord::Base.connection.exec_query(sql)
 # end
 
-#Inserting into variants
+# Inserting into variants
 # k = 1
 # 347.times do
 #   testsql = "select * from questions where discipline_id = '#{k}' and part = 'A'"
@@ -637,9 +637,9 @@ Faker::Config.locale = :ru
 
 
 
-#300 150 50
+# 300 150 50
 
-#FIXING VAR_NUM
+# FIXING VAR_NUM
 # i = 1
 # 20000.times do 
 #   presql = "select * from variants where var_num > 20" 
@@ -658,17 +658,17 @@ Faker::Config.locale = :ru
 # end
 
 # FIXING ROLES
-  # presql = "select * from persons where role_id = 'S'" 
-  # res = ActiveRecord::Base.connection.exec_query(presql)
-  # res.each do |hash|
-  #     sql = "update persons set role_id = 'Студент' where id = '#{hash["id"]}'"
-  #     ActiveRecord::Base.connection.exec_query(sql)
-  # end
+#   presql = "select * from persons where role_id = 'S'" 
+#   res = ActiveRecord::Base.connection.exec_query(presql)
+#   res.each do |hash|
+#       sql = "update persons set role_id = 'Студент' where id = '#{hash["id"]}'"
+#       ActiveRecord::Base.connection.exec_query(sql)
+#   end
 
-      # sql = "update students set quota = 'Платное' where quota = 'P'"
-      # ActiveRecord::Base.connection.exec_query(sql)
+#       sql = "update students set quota = 'Платное' where quota = 'P'"
+#       ActiveRecord::Base.connection.exec_query(sql)
 
-#fixing otchisl
+# fixing otchisl
 # i = 0
 # presql = "select * from students, attempts where students.id = attempts.student_id and attempts.attempt_num = 3 and attempts.mark = 2"
 # res = ActiveRecord::Base.connection.exec_query(presql)
@@ -681,3 +681,20 @@ Faker::Config.locale = :ru
 #   ActiveRecord::Base.connection.exec_query(sql)
 # end
 # p i
+
+# i = 353527
+# while i <= 371227 do 
+#   sql = "delete from students where id = '#{i}'"
+#   ActiveRecord::Base.connection.exec_query(sql)
+#   i += 1
+# end 
+
+# presql = "select * from students where date_of_otchislenie is null and extract(year from date_of_entering) <= 2018 "
+# res = ActiveRecord::Base.connection.exec_query(presql)
+# res.each do |el|
+#   date = el["date_of_entering"].split('-').map(&:to_i)
+#   year = date[0]
+#   out_year = year + 4
+#   sql = "update students set year_of_out = '#{out_year}' where students.id = '#{el["id"]}'"
+#   ActiveRecord::Base.connection.exec_query(sql)
+# end
